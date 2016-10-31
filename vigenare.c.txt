@@ -6,6 +6,7 @@
 
 int main(int argc, string argv[])
 {
+//check if function getting 2 arguments
 if (argc != 2) {
 printf("Try again\n");
 return 1;
