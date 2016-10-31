@@ -6,40 +6,53 @@
 
 int main(int argc, string argv[])
 {
-//check if function getting 2 arguments
-if (argc != 2) {
-printf("Try again\n");
-return 1;
-}
-//taking key from second argument to hash text
-string key  = argv[1];
-for (int k = 0, n = strlen(key); k < n; k++) {
-if (!isalpha(key[k])) {
-printf("Try again\n");
-return 1;
-}
-}
-string txt = GetString();
-if (txt == NULL){ 
-printf("Try again");
-return 1;
-}
-for (int i = 0,j=0; i < strlen(txt); i++)
-{
-if (isalpha(txt[i]))
-{
+	//check if function getting 2 arguments
+	if (argc != 2) 
+	{
+		printf("Try again\n");
+		return 1;
+	}
+
+	//taking key from second argument to hash text
+	string key  = argv[1];
+
+	//check if symbol is letter
+	for (int k = 0, lengthkey = strlen(key); k < lengthkey; k++)  
+	{
+		if (!isalpha(key[k])) 
+		{
+			printf("Try again\n");
+			return 1;
+		}
+	}
+
+	//initialization of text
+	string txt = GetString();
+ 	
+	//check if text is empty
+	if (txt == NULL)
+	{ 
+		printf("Try again");
+		return 1;
+	}
+	
+	//main loop, encryption
+	for (int counttxt=0, countkey=0; counttxt<strlen(txt); counttxt++)
+	{
+		if (isalpha(txt[counttxt])) //review if letter alpha
+		{
+
+			if (islower(txt[counttxt])) //if letter in text is lower then...
+			printf("%c",((((txt[counttxt]-'a')+((tolower(key[countkey++%strlen(key)]))-'a')%26)%26)+'a'));
 
 
-if (islower(txt[i]))
-printf("%c", ((((txt[i] - 'a') + ((tolower(key[j++%strlen(key)])) - 'a') % 26) % 26) + 'a'));
+			if (isupper(txt[counttxt])) //if letter in text is upper then ...
+			printf("%c",((((txt[counttxt]-'A')+((toupper(key[countkey++%strlen(key)]))-'A')%26)%26)+'A'));
+		}
+		else
+		printf("%c", txt[counttxt]);
+	}
 
-
-if (isupper(txt[i]))
-printf("%c", ((((txt[i] - 'A') + ((toupper(key[j++%strlen(key)])) - 'A') % 26) % 26) + 'A'));
-}
-else
-printf("%c", txt[i]);
-}
-printf("\n");
-return 0;
+	printf("\n");
+	return 0;
 }
